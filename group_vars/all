@@ -36,3 +36,6 @@ cdh_install_mysql: true
 cdh_install_rngd: true
 cdh_install_groups_users: true
 cdh_install_cluster: true
+
+# hostname_var can be set to 'ansible_fqdn' (to use the internal hostname) or 'inventory_hostname' (default, uses the public/inventory hostname)
+hostname_var: 'inventory_hostname'

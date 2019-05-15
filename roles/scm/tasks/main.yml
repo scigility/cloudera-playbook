@@ -12,7 +12,7 @@
 - name: Prepare Cloudera Manager Server External Database
   command: |
     {{ scm_prepare_database_script_path }}  -f
-    --host {{ hostvars[db_hostname]['inventory_hostname'] }}
+    --host {{ hostvars[db_hostname][hostname_var] }}
     {{ database_type }} {{ databases.scm.name }} {{ databases.scm.user }} {{ databases.scm.pass }}
   changed_when: False
 
