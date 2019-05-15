@@ -10,31 +10,36 @@
 - name: Install rngd
   hosts: cdh_servers
   roles:
-    - rngd
+    - role: rngd
+      when: cdh_install_rngd
   tags: rngd
 
 - name: Install Java
   hosts: cdh_servers
   roles:
-    - java
+    - role: java
+      when: cdh_install_java 
   tags: java
 
 - name: Install MariaDB and create databases
   hosts: db_server
   roles:
-    - mariadb
+    - role: mariadb
+      when: cdh_install_mysql 
   tags: mysql
 
 - name: Install MySQL Connector
   hosts: utility_servers:master_servers
   roles:
-    - mysql_connector
+    - role: mysql_connector
+      when: cdh_install_mysql 
   tags: mysql
 
 - name: Install MIT KDC Server
   hosts: krb5_server
   roles:
-    - { role: krb5_server, when: krb5_kdc_type == 'mit' }
+    - role: krb5_server
+      when: krb5_kdc_type == 'mit'
   tags: krb5
 
 - name: Configure EPEL Repository
@@ -53,11 +58,12 @@
   hosts: scm_server
   roles:
     - scm
-  tags: cluster_template
+  tags: cm_server,cluster_template
 
 - name: Install CDH
   hosts: scm_server
   roles:
-    - cdh
+    - role: cdh
+      when: cdh_install_cluster
   tags: cluster_template
 

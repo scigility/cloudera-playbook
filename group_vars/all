@@ -30,3 +30,9 @@ cloudera_repository_baseurl:        "{{ configs_by_version[cdh_major_version].re
 cloudera_repository_gpgkey:         "{{ configs_by_version[cdh_major_version].repo_url }}/RPM-GPG-KEY-cloudera"
 scm_prepare_database_script_path:   "{{ configs_by_version[cdh_major_version].scm_prepare_database_script_path }}"
 scm_parcel_repository:              "{{ configs_by_version[cdh_major_version].scm_parcel_repository }}"
+
+cdh_install_java: true
+cdh_install_mysql: true
+cdh_install_rngd: true
+cdh_install_groups_users: true
+cdh_install_cluster: true

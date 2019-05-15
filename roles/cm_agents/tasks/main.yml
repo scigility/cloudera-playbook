@@ -1,6 +1,7 @@
 ---
 
 - include: 36322.yml
+  when: cdh_install_groups_users | default(False)
 
 - name: Install Cloudera Manager Agents
   yum: name={{ item }} state=installed
