@@ -1,6 +1,6 @@
 ---
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
-postgresql_enablerepo: "pgdb10"
+postgresql_enablerepo: "pgdg10"
 # CentOS 7 PostgreSQL 10.x
 # https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
