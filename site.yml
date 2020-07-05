@@ -26,18 +26,15 @@
   tags:
     - mysql
     - mysql_server
-  when:
-    - database_type == "mysql"
+# TODO: implement when clause to choose between mariadb and postgres roles dependant on database_type == "xx"
 
 - name: Install PostgreSQL and create databases
   hosts: db_server
   roles:
-    - geerlingguy.postgres
+    - geerlingguy.postgresql
   tags:
     - postgres
     - postgres_server
-  when:
-    - database_type == "postgresql"
 
 - name: Install MySQL Connector
   hosts: cdh_servers
