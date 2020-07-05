@@ -11,10 +11,10 @@ cdh_services:
   - type: hbase
 
   - type: hdfs
-    dfs_data_dir_list: /dfs/dn
-    fs_checkpoint_dir_list: /dfs/snn
-    dfs_name_dir_list: /dfs/nn
-    dfs_journalnode_edits_dir: /dfs/jn
+    dfs_data_dir_list: /data/disk1/dfs/dn,/data/disk2/dfs/dn,/data/disk3/dfs/dn
+    fs_checkpoint_dir_list: /data/disk2/snn
+    dfs_name_dir_list: /data/disk1/nn
+    dfs_journalnode_edits_dir: /data/disk3/jn
 
   - type: hive
 
