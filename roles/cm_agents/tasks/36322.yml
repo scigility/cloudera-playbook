@@ -95,12 +95,14 @@
     shell: /sbin/nologin
     system: yes
 
-- name: Create user 'sentry'
-  user:
-    name: sentry
-    home: /var/lib/sentry
-    shell: /sbin/nologin
-    system: yes
+## TODO: apply when clause if CDH major version < 7
+#- name: Create user 'sentry'
+#  user:
+#    name: sentry
+#    home: /var/lib/sentry
+#    shell: /sbin/nologin
+#    system: yes
+
 
 - name: Create user 'solr'
   user:
