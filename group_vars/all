@@ -91,6 +91,9 @@ configs_by_version:
     scm_parcel_repositories:
       - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/cdh7/{{ cluster_version_cdh }}/parcels"
     scm_prepare_database_script_path: "/opt/cloudera/cm/schema/scm_prepare_database.sh"
+    scm_csds:
+          - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/spark3/SPARK3_ON_YARN-3.0.0.2.99.0.0-23.jar"
+          - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/cdsw1/1.7.2/csd/CLOUDERA_DATA_SCIENCE_WORKBENCH-CDPDC-1.7.2.jar"
 
 scm_default_user: admin
 scm_default_pass: admin
