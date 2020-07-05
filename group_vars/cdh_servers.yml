@@ -6,6 +6,7 @@ scm_hostname: "{{ hostvars[groups['scm_server'][0]]['inventory_hostname'] }}"
 cluster_display_name: cluster_1
 
 cdh_services:
+# TODO: add when clause for hive-on-tez, livy, tez, zeppelin
 
   - type: hbase
 
@@ -17,10 +18,14 @@ cdh_services:
 
   - type: hive
 
+  - type: hive-on-tez
+
   - type: hue
 
   - type: impala
     scratch_dirs: /tmp/impala
+
+  - type: livy
 
   - type: oozie
 
@@ -29,8 +34,12 @@ cdh_services:
 
   - type: spark
 
+  - type: tez
+
   - type: yarn
     yarn_nodemanager_local_dirs: /tmp/nm
     yarn_nodemanager_log_dirs: /var/log/nm
+
+  - type: zeppelin
 
   - type: zookeeper
