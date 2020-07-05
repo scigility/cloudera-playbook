@@ -22,6 +22,8 @@ postgresql_service_enabled: true
 postgresql_global_config_options:
   - option: unix_socket_directories
     value: '{{ postgresql_unix_socket_directories | join(",") }}'
+  - option: listen_addresses
+    value: "*"
 
 # Host based authentication (hba) entries to be added to the pg_hba.conf. This
 # variable's defaults reflect the defaults that come with a fresh installation.
@@ -39,37 +41,21 @@ postgresql_locales:
 # Databases to ensure exist.
 postgresql_databases:
   - name: scm
-    login_user: scm
     owner: scm
-    login_host: localhost
   - name: amon
-    login_user: amon
     owner: amon
-    login_host: localhost
   - name: rman
-    login_user: rman
     owner: rman
-    login_host: localhost
   - name: metastore
-    login_user: hive
     owner: hive
-    login_host: localhost
   - name: hue
-    login_user: hue
     owner: hue
-    login_host: localhost
   - name: oozie
-    login_user: oozie
     owner: oozie
-    login_host: localhost
   - name: das
-    login_user: das
     owner: das
-    login_host: localhost
   - name: ranger
-    login_user: ranger
     owner: ranger
-    login_host: localhost
 # - name: exampledb # required; the rest are optional
 #   lc_collate: # defaults to 'en_US.UTF-8'
 #   lc_ctype: # defaults to 'en_US.UTF-8'
@@ -86,29 +72,21 @@ postgresql_databases:
 # Users to ensure exist.
 postgresql_users:
   - name: scm
-    password: scm-pw
-    db: scm
+    password: scm_password
   - name: amon
-    password: amon-pw
-    db: amon
+    password: amon_password
   - name: rman
-    password: rman-pw
-    db: rman
+    password: rman_password
   - name: hive
-    password: hive-pw
-    db: metastore
+    password: hive_password
   - name: hue
-    password: hue-pw
-    db: hue
+    password: hue_password
   - name: oozie
-    password: oozie-pw
-    db: oozie
+    password: oozie_password
   - name: das
-    password: das-pw
-    db: das
+    password: das_password
   - name: ranger
-    password: ranger-pw
-    db: ranger
+    password: ranger_password
 
 # - name: jdoe #required; the rest are optional
 #   password: # defaults to not set
@@ -125,3 +103,15 @@ postgresql_users:
 
 # Whether to output user data when managing users.
 postgres_users_no_log: false
+
+# CentOS / RHEL 7 config for PostgreSQL 10.13
+postgresql_version: "10.13"
+postgresql_data_dir: "/var/lib/pgsql/10/data"
+postgresql_bin_path: "/usr/pgsql-10/bin"
+postgresql_config_path: "/var/lib/pgsql/10/data"
+postgresql_daemon: postgresql-10
+postgresql_packages:
+  - postgresql10
+  - postgresql10-server
+  - postgresql10-contrib
+  - postgresql10-libs
