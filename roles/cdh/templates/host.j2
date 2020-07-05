@@ -31,7 +31,9 @@
     "HDFS-1-FAILOVERCONTROLLER-BASE",
     "HDFS-1-JOURNALNODE-BASE",
     "HIVE-1-HIVEMETASTORE-BASE",
+    {% if cluster_version_cdh_major < '7' %}
     "SENTRY-1-SENTRY_SERVER-BASE",
+    {% endif %}
     "YARN-1-RESOURCEMANAGER-BASE",
     "ZOOKEEPER-1-SERVER-BASE" ]
 }, {
@@ -43,7 +45,9 @@
     "HDFS-1-FAILOVERCONTROLLER-BASE",
     "HDFS-1-JOURNALNODE-BASE",
     "HIVE-1-HIVEMETASTORE-BASE",
+    {% if cluster_version_cdh_major < '7' %}
     "SENTRY-1-SENTRY_SERVER-BASE",
+    {% endif %}
     "YARN-1-RESOURCEMANAGER-BASE",
     "ZOOKEEPER-1-SERVER-BASE" ]
 }, {

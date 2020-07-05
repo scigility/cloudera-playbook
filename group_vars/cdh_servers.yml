@@ -24,7 +24,8 @@ cdh_services:
 
   - type: oozie
 
-  - type: sentry
+  #- type: sentry
+  # TODO: add when CDH major > 6 condition to not include sentry
 
   - type: spark
 
