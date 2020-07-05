@@ -48,7 +48,7 @@
     "HDFS-1-NAMENODE-BASE",
     "HDFS-1-FAILOVERCONTROLLER-BASE",
     "HDFS-1-JOURNALNODE-BASE",
-    "HIVE-1-HIVEMETASTORE-BASE",
+    "HIVE-HMS-1-HIVEMETASTORE-BASE",
     {% if cluster_version_cdh_major < '7' %}
     "SENTRY-1-SENTRY_SERVER-BASE",
     {% endif %}
@@ -76,7 +76,10 @@
   "roleConfigGroupsRefNames": [
     "HBASE-1-REGIONSERVER-BASE",
     "HDFS-1-DATANODE-BASE",
-    "HIVE-1-GATEWAY-BASE",
+    "HIVE-HMS-1-GATEWAY-BASE",
+    "HIVE_ON_TEZ-1-GATEWAY-BASE",
+    "TEZ-1-GATEWAY-BASE",
+    "LIVY-1-GATEWAY-BASE",
     "IMPALA-1-IMPALAD-BASE",
     "SPARK_ON_YARN-1-GATEWAY-BASE",
     {% if cluster_version_cdh_major < '6' %}
