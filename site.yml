@@ -19,14 +19,14 @@
     - java
   tags: java
 
-- name: Install MariaDB and create databases
-  hosts: db_server
-  roles:
-    - mariadb
-  tags:
-    - mysql
-    - mysql_server
 # TODO: implement when clause to choose between mariadb and postgres roles dependant on database_type == "xx"
+#- name: Install MariaDB and create databases
+#  hosts: db_server
+#  roles:
+#    - mariadb
+#  tags:
+#    - mysql
+#    - mysql_server
 
 - name: Install PostgreSQL and create databases
   hosts: db_server
@@ -36,13 +36,13 @@
     - postgres
     - postgres_server
 
-- name: Install MySQL Connector
-  hosts: cdh_servers
-  roles:
-    - mysql_connector
-  tags:
-    - mysql
-    - mysql_client
+#- name: Install MySQL Connector
+#  hosts: cdh_servers
+#  roles:
+#    - mysql_connector
+#  tags:
+#    - mysql
+#    - mysql_client
 
 - name: Install MIT KDC Server
   hosts: krb5_server
