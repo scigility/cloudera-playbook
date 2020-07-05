@@ -1,0 +1,3 @@
+- src: git@github.com:geerlingguy/ansible-role-postgresql.git
+  scm: git
+  name: geerlingguy.postgresql

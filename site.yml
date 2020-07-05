@@ -26,6 +26,18 @@
   tags:
     - mysql
     - mysql_server
+  when:
+    - database_type == "mysql"
+
+- name: Install PostgreSQL and create databases
+  hosts: db_server
+  roles:
+    - geerlingguy.postgres
+  tags:
+    - postgres
+    - postgres_server
+  when:
+    - database_type == "postgresql"
 
 - name: Install MySQL Connector
   hosts: cdh_servers

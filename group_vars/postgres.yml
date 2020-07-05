@@ -1,0 +1,127 @@
+---
+# RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
+postgresql_enablerepo: "pgdg-redhat-repo-latest"
+# CentOS 7 PostgreSQL 10.x
+# https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+# Set postgresql state when configuration changes are made. Recommended values:
+# `restarted` or `reloaded`
+postgresql_restarted_state: "restarted"
+
+postgresql_python_library: python-psycopg2
+postgresql_user: postgres
+postgresql_group: postgres
+
+postgresql_unix_socket_directories:
+  - /var/run/postgresql
+
+postgresql_service_state: started
+postgresql_service_enabled: true
+
+# Global configuration options that will be set in postgresql.conf.
+postgresql_global_config_options:
+  - option: unix_socket_directories
+    value: '{{ postgresql_unix_socket_directories | join(",") }}'
+
+# Host based authentication (hba) entries to be added to the pg_hba.conf. This
+# variable's defaults reflect the defaults that come with a fresh installation.
+postgresql_hba_entries:
+  - {type: local, database: all, user: postgres, auth_method: peer}
+  - {type: local, database: all, user: all, auth_method: peer}
+  - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5}
+  - {type: host, database: all, user: all, address: '::1/128', auth_method: md5}
+  - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5}
+
+# Debian only. Used to generate the locales used by PostgreSQL databases.
+postgresql_locales:
+  - 'en_US.UTF-8'
+
+# Databases to ensure exist.
+postgresql_databases:
+  - name: scm
+    login_user: scm
+    owner: scm
+    login_host: localhost
+  - name: amon
+    login_user: amon
+    owner: amon
+    login_host: localhost
+  - name: rman
+    login_user: rman
+    owner: rman
+    login_host: localhost
+  - name: metastore
+    login_user: hive
+    owner: hive
+    login_host: localhost
+  - name: hue
+    login_user: hue
+    owner: hue
+    login_host: localhost
+  - name: oozie
+    login_user: oozie
+    owner: oozie
+    login_host: localhost
+  - name: das
+    login_user: das
+    owner: das
+    login_host: localhost
+  - name: ranger
+    login_user: ranger
+    owner: ranger
+    login_host: localhost
+# - name: exampledb # required; the rest are optional
+#   lc_collate: # defaults to 'en_US.UTF-8'
+#   lc_ctype: # defaults to 'en_US.UTF-8'
+#   encoding: # defaults to 'UTF-8'
+#   template: # defaults to 'template0'
+#   login_host: # defaults to 'localhost'
+#   login_password: # defaults to not set
+#   login_user: # defaults to '{{ postgresql_user }}'
+#   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+#   port: # defaults to not set
+#   owner: # defaults to postgresql_user
+#   state: # defaults to 'present'
+
+# Users to ensure exist.
+postgresql_users:
+  - name: scm
+    password: scm-pw
+    db: scm
+  - name: amon
+    password: amon-pw
+    db: amon
+  - name: rman
+    password: rman-pw
+    db: rman
+  - name: hive
+    password: hive-pw
+    db: metastore
+  - name: hue
+    password: hue-pw
+    db: hue
+  - name: oozie
+    password: oozie-pw
+    db: oozie
+  - name: das
+    password: das-pw
+    db: das
+  - name: ranger
+    password: ranger-pw
+    db: ranger
+
+# - name: jdoe #required; the rest are optional
+#   password: # defaults to not set
+#   encrypted: # defaults to not set
+#   priv: # defaults to not set
+#   role_attr_flags: # defaults to not set
+#   db: # defaults to not set
+#   login_host: # defaults to 'localhost'
+#   login_password: # defaults to not set
+#   login_user: # defaults to '{{ postgresql_user }}'
+#   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+#   port: # defaults to not set
+#   state: # defaults to 'present'
+
+# Whether to output user data when managing users.
+postgres_users_no_log: false
