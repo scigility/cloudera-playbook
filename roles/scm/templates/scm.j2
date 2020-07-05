@@ -34,6 +34,9 @@
       "name" : "REMOTE_PARCEL_REPO_URLS",
       "value" : {% set repo_j = joiner(",") %}
       "{% for repo in scm_parcel_repositories %}{{ repo_j() }}{{ repo }}{% endfor %}"
+    }, {
+      "name" : "PARCEL_DISTRIBUTE_RATE_LIMIT_KBS_PER_SECOND",
+      "value" : "1000000"
     }
   ]
 }
