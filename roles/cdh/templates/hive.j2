@@ -1,78 +1,102 @@
 {
-  "refName": "HIVE-1",
-  "serviceType": "HIVE",
-  "serviceConfigs": [
+      "refName": "TEZ-1",
+      "serviceType": "TEZ",
+      "serviceConfigs": [
+        {
+          "name": "yarn_service",
+          "ref": "YARN-1"
+        }
+      ],
+      "roleConfigGroups": [
+        {
+          "refName": "TEZ-1-GATEWAY-BASE",
+          "roleType": "GATEWAY",
+          "base": true
+        }
+      ]
+    },
     {
-      "name": "hive_metastore_database_host",
-      "value": "{{ hostvars[db_hostname]['inventory_hostname'] }}"
-    }, {
-      "name": "hive_metastore_database_type",
-      "value": "{{ databases.metastore.type }}"
-    }, {
-      "name": "hive_metastore_database_name",
-      "value": "{{ databases.metastore.name }}"
-    }, {
-      "name": "hive_metastore_database_user",
-      "value": "{{ databases.metastore.user }}"
-    }, {
-      "name": "hive_metastore_database_password",
-      "value": "{{ databases.metastore.pass }}"
-    }, {
-      "name": "spark_on_yarn_service",
-      "ref": "SPARK_ON_YARN-1"
-    }, {
-      "name": "mapreduce_yarn_service",
-      "ref": "YARN-1"
-    }, {
-      "name": "zookeeper_service",
-      "ref": "ZOOKEEPER-1"
-    }
-    {% if cluster_version_cdh_major < '6' %}
-    , {
-      "name": "sentry_service",
-      "ref": "SENTRY-1"
-    }
-    {% endif %}
-  ],
-  "roleConfigGroups": [
+      "refName": "HIVE-HMS-1",
+      "serviceType": "HIVE",
+      "displayName": "Hive Metastore",
+      "serviceConfigs": [
+          {
+            "name": "hive_metastore_database_host",
+            "value": "{{ hostvars[db_hostname]['inventory_hostname'] }}"
+          }, {
+            "name": "hive_metastore_database_type",
+            "value": "{{ databases.metastore.type }}"
+          }, {
+            "name": "hive_metastore_database_name",
+            "value": "{{ databases.metastore.name }}"
+          }, {
+            "name": "hive_metastore_database_user",
+            "value": "{{ databases.metastore.user }}"
+          }, {
+            "name": "hive_metastore_database_password",
+            "value": "{{ databases.metastore.pass }}"
+          }
+        ],
+      "roleConfigGroups": [
+        {
+          "refName": "HIVE-HMS-1-GATEWAY-BASE",
+          "roleType": "GATEWAY",
+          "base": true
+        },
+        {
+          "refName": "HIVE-HMS-1-HIVEMETASTORE-BASE",
+          "roleType": "HIVEMETASTORE",
+          "configs": [
+                  {
+                    "name": "hive_enable_db_notification",
+                    "value": "true"
+                  }, {
+                    "name": "hive_metastore_delegation_token_store",
+                    "value": "org.apache.hadoop.hive.thrift.DBTokenStore"
+                  }
+           ],
+          "base": true
+        }
+      ]
+    },
     {
-      "refName": "HIVE-1-GATEWAY-BASE",
-      "roleType": "GATEWAY",
-      "configs": [],
-      "base": true
-    }, {
-      "refName": "HIVE-1-WEBHCAT-BASE",
-      "roleType": "WEBHCAT",
-      "configs": [
+      "refName": "HIVE_ON_TEZ-1",
+      "serviceType": "HIVE_ON_TEZ",
+      "displayName": "Hive",
+      "serviceConfigs": [
         {
-          "name": "hive_webhcat_address_port",
-          "value": "7272"
+          "name": "hms_connector",
+          "ref": "HIVE-HMS-1"
+        },
+        {
+          "name": "tez_service",
+          "ref": "TEZ-1"
+        },
+        {
+          "name": "zookeeper_service",
+          "ref": "ZOOKEEPER-1"
+        },
+        {
+          "name": "mapreduce_yarn_service",
+          "ref": "YARN-1"
         }
       ],
-      "base": true
-    }, {
-      "refName": "HIVE-1-HIVEMETASTORE-BASE",
-      "roleType": "HIVEMETASTORE",
-      "configs": [
+      "roleConfigGroups": [
         {
-          "name": "hive_enable_db_notification",
-          "value": "true"
-        }, {
-          "name": "hive_metastore_delegation_token_store",
-          "value": "org.apache.hadoop.hive.thrift.DBTokenStore"
-        }
-      ],
-      "base": true
-    }, {
-      "refName": "HIVE-1-HIVESERVER2-BASE",
-      "roleType": "HIVESERVER2",
-      "configs": [
+          "refName": "HIVE_ON_TEZ-1-GATEWAY-BASE",
+          "roleType": "GATEWAY",
+          "base": true
+        },
         {
-          "name": "hiveserver2_enable_impersonation",
-          "value": "false"
+          "refName": "HIVE_ON_TEZ-1-HIVESERVER2-BASE",
+          "roleType": "HIVESERVER2",
+           "configs": [
+                  {
+                    "name": "hiveserver2_enable_impersonation",
+                    "value": "false"
+                  }
+           ],
+          "base": true
         }
-      ],
-      "base": true
+      ]
     }
-  ]
-}

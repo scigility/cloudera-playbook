@@ -3,8 +3,11 @@
   "cardinality": 1,
   "roleConfigGroupsRefNames": [
     "HDFS-1-GATEWAY-BASE",
-    "HIVE-1-GATEWAY-BASE",
+    "HIVE-HMS-1-GATEWAY-BASE",
+    "HIVE_ON_TEZ-1-GATEWAY-BASE",
+    "TEZ-1-GATEWAY-BASE",
     "SPARK_ON_YARN-1-GATEWAY-BASE",
+    "LIVY-1-GATEWAY-BASE",
     "YARN-1-GATEWAY-BASE" ]
 }, {
   "refName": "HostTemplate-Edge",
@@ -13,7 +16,7 @@
     "HDFS-1-HTTPFS-BASE",
     "HBASE-1-HBASERESTSERVER-BASE",
     "HBASE-1-HBASETHRIFTSERVER-BASE",
-    "HIVE-1-HIVESERVER2-BASE",
+    "HIVE_ON_TEZ-1-HIVESERVER2-BASE",
     "HUE-1-HUE_SERVER-BASE",
     "HUE-1-HUE_LOAD_BALANCER-BASE",
     {% if (krb5_kdc_type is defined) and (krb5_kdc_type != 'none') %}
@@ -30,7 +33,7 @@
     "HDFS-1-NAMENODE-BASE",
     "HDFS-1-FAILOVERCONTROLLER-BASE",
     "HDFS-1-JOURNALNODE-BASE",
-    "HIVE-1-HIVEMETASTORE-BASE",
+    "HIVE-HMS-1-HIVEMETASTORE-BASE",
     {% if cluster_version_cdh_major < '7' %}
     "SENTRY-1-SENTRY_SERVER-BASE",
     {% endif %}
@@ -59,6 +62,7 @@
     "HDFS-1-JOURNALNODE-BASE",
     "IMPALA-1-CATALOGSERVER-BASE",
     "IMPALA-1-STATESTORE-BASE",
+    "LIVY-1-LIVY_SERVER-BASE",
     "SPARK_ON_YARN-1-SPARK_YARN_HISTORY_SERVER-BASE",
     {% if cluster_version_cdh_major < '6' %}
     "SPARK2_ON_YARN-1-SPARK2_YARN_HISTORY_SERVER-BASE",
