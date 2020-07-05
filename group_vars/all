@@ -90,9 +90,12 @@ configs_by_version:
     scm_repo_gpgkey: "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/cm7/{{ cluster_version_cm }}/redhat{{ ansible_distribution_major_version }}/yum/RPM-GPG-KEY-cloudera"
     scm_parcel_repositories:
       - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/cdh7/{{ cluster_version_cdh }}/parcels"
+      ## TODO add spark3 https://archive.cloudera.com/spark3/2.99.0.0/parcels
+      ## TODO add CDSW https://archive.cloudera.com/cdsw1/1.7.2/parcels keep in mind this needs separate partition for /opt/cloudera
+
     scm_prepare_database_script_path: "/opt/cloudera/cm/schema/scm_prepare_database.sh"
     scm_csds:
-          - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/spark3/SPARK3_ON_YARN-3.0.0.2.99.0.0-23.jar"
+          - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/spark3/2.99.0.0/csd/SPARK3_ON_YARN-3.0.0.2.99.0.0-23.jar"
           - "{{ cloudera_archive_protocol }}{{ cloudera_archive }}/cdsw1/1.7.2/csd/CLOUDERA_DATA_SCIENCE_WORKBENCH-CDPDC-1.7.2.jar"
 
 scm_default_user: admin
