@@ -1,0 +1,47 @@
+
+- name: Configure LVM for /opt/cloudera
+  hosts: all
+  roles:
+    - os/lvm
+  tags:
+    - os
+  vars:
+    lvm_vgs:
+      lv_cloudera:
+        vg_name: vg_cloudera
+        pv_name: /dev/sdc
+        lv_size: 30G
+        mount_point: /opt/cloudera
+
+- name: Configure LVM for Postgres
+  hosts: db_server
+  roles:
+    - os/lvm
+  tags:
+    - os
+    - postgres
+  vars:
+    lvm_vgs:
+      lv_postgres:
+        vg_name: vg_db
+        pv_name: /dev/sdd
+        lv_size: 30G
+        mount_point: /app/db
+
+- name: Configure Raw Disks for Worker Nodes
+  hosts: worker_servers
+  roles:
+    - os/rawdisks
+  tags:
+    - os
+  vars:
+    fs_partitions:
+      disk1:
+        device: /dev/sdd
+        mountpoint: /app/data/disk1
+      disk2:
+        device: /dev/sde
+        mountpoint: /app/data/disk2
+      disk3:
+        device: /dev/sdf
+        mountpoint: /app/data/disk3

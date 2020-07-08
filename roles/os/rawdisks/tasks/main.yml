@@ -1,0 +1,16 @@
+--
+
+  - name: Create the file system "{{ item.mount_point }}".
+    filesystem:
+      fstype: "{{ item.file_system | default(file_system_default) }}"
+      dev: "{{ item.device }}"
+    with_items: "{{ fs_partitions }}"
+
+  - name: Mount the created filesystem ## This is to create the FSTAB entry and mount the Filesystem.
+    mount:
+      path: "{{ item.mount_point }}"
+      src: "{{ item.device }}"
+      fstype: "{{ item.file_system | default(file_system_default) }}" ## Filesystem type
+      opts: rw,noatime,noexec,nodev,nosuid ## Mount options
+      state: mounted
+    with_items: "{{ fs_partitions }}"

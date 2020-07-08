@@ -1,0 +1,4 @@
+file_system_default: 'xfs'
+# var 'fs_partitions' has to be provided (in the group_vars)
+__fs_partitions: "{{ fs_partitions | default([]) }}"
+
