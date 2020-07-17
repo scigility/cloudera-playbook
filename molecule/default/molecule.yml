@@ -60,7 +60,7 @@ provisioner:
       cdh_servers:
         java_installation_strategy: package
         # assigning templates to our host:
-        host_template: HostTemplate-Edge
+        host_template: HostTemplate-SingleNode
         role_ref_names: HDFS-HTTPFS-1
   lint:
     name: ansible-lint
