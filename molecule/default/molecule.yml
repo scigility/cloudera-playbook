@@ -24,6 +24,8 @@ platforms:
       # following groups required by the role's site.yml playbook
       - cdh_servers
       - db_server
+      # TODO merge 'postgres' into 'db_server' group_vars
+      - postgres   # group used to define postgres group_vars    
       - scm_server # group used during 'scm' role
       - krb5_server
     # networks:
