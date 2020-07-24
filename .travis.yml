@@ -14,7 +14,7 @@ install:
   # 'jmespath' required by the 'cdh' role (that uses the 'json_query' filter)
   - pip install jmespath
   # install required galaxy roles (postgresql)
-  - ansible-galaxy install -r requirements.yml
+  - ansible-galaxy install -r requirements.yml --roles-path roles
   #- ansible-galaxy install geerlingguy.postgresql
 script:
   - molecule test
